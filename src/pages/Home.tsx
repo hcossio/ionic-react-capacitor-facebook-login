@@ -19,6 +19,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.getUserInfo();
+    // this.getUserFriends();
   }
 
   componentWillReceiveProps(nextProps: any) {
@@ -35,13 +36,22 @@ class Home extends Component {
   }
 
   async getUserInfo() {
-    const response = await fetch(`https://graph.facebook.com/${this.props.location.state.userId}?fields=id,name,gender,link,picture&type=large&access_token=${this.props.location.state.token}`);
+    const response = await fetch(`https://graph.facebook.com/${this.props.location.state.userId}/friends/100660329304151&access_token=${this.props.location.state.token}`);
     const myJson = await response.json();
     console.log(myJson);
     this.setState({
       user: myJson
     })
   }
+
+  // async getUserFriends() {
+  //   const response = await fetch(`https://graph.facebook.com/${this.props.location.state.userId}?fields=friends&access_token=${this.props.location.state.token}`);
+  //   const myJson = await response.json();
+  //   console.log(myJson);
+  //   this.setState({
+  //     friends: myJson
+  //   })
+  // }
 
   render() {
     return (
@@ -61,16 +71,25 @@ class Home extends Component {
             </IonCol>
           </IonRow>
 
-          {this.state.user.name &&
+          {this.state.user.name && 
             <IonItem>
               <IonThumbnail slot="start">
-                <img src={this.state.user.picture.data.url} />
+                {/* <img src={this.state.user.picture.data.url} /> */}
               </IonThumbnail>
               <IonLabel>
-                <h3>{this.state.user.name}</h3>
+                {/* <h3>{this.state.user.name}</h3> */}
+                <h3>Data [{this.state.user.friends.data.name}]</h3>
               </IonLabel>
             </IonItem>
           }
+
+          
+            {/* <IonItem>
+              <IonLabel>
+              <h3>Friends</h3>
+                <h3>{this.state.user.gender}</h3>
+              </IonLabel>
+            </IonItem> */}
 
           <IonButton className="login-button" onClick={() => this.signOut()} expand="full" fill="solid" color="danger">
             Logout from Facebook

@@ -1,6 +1,6 @@
 {
-  "appId": "com.enappd.FaceCapReact",
-  "appName": "FaceCapReact",
+  "appId": "com.facebookconnect.rctech",
+  "appName": "FacebookConnect",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build"
